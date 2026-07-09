@@ -14,27 +14,25 @@ def get_knowledge(incident):
     incident_embedding = create_embedding(title)
 
     results = []
-    
 
     for document in knowledge_cache:
 
-       
         score = similarity(
-        incident_embedding,
-        document["embedding"]
-     )
+            incident_embedding,
+            document["embedding"]
+        )
 
-    print(f'{document['filename']} -> {score:.3f}')
+        print(f'{document["filename"]} -> {score:.3f}')
 
-    results.append({
+        results.append({
 
-        "filename": document["filename"],
+            "filename": document["filename"],
 
-        "score": score,
+            "score": score,
 
-        "content": document["content"]
+            "content": document["content"]
 
-    })
+        })
 
     if not results:
         return "No knowledge found."
