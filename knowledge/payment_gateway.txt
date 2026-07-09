@@ -1,0 +1,19 @@
+Title:
+Payment Gateway Timeout
+
+Symptoms:
+- Payment requests timeout.
+- Transactions remain pending.
+- Customers receive timeout errors.
+
+Possible Cause:
+Payment gateway API latency or network congestion.
+
+Resolution:
+1. Check payment gateway health.
+2. Restart API Gateway services.
+3. Validate network connectivity.
+4. Retry failed transactions.
+
+Preventive Action:
+Monitor payment gateway response times and configure alert thresholds.

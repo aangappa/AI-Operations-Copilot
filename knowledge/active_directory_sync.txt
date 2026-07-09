@@ -1,0 +1,18 @@
+Title:
+Active Directory Synchronization Failure
+
+Symptoms:
+- New users cannot log in.
+- Password changes are not synchronized.
+- Authentication delays.
+
+Possible Cause:
+Directory synchronization service stopped.
+
+Resolution:
+1. Restart synchronization service.
+2. Verify domain controller connectivity.
+3. Review synchronization logs.
+
+Preventive Action:
+Monitor synchronization jobs continuously.

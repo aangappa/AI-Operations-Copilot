@@ -1,0 +1,19 @@
+Title:
+FordPass Authentication Failure
+
+Symptoms:
+- Users cannot access FordPass.
+- Mobile application login fails.
+- Authentication API returns unauthorized errors.
+
+Possible Cause:
+Authentication service became unavailable after backend database maintenance.
+
+Resolution:
+1. Restart Authentication Service.
+2. Clear API Gateway cache.
+3. Validate OAuth token service.
+4. Perform application health checks.
+
+Preventive Action:
+Run post-maintenance authentication validation before restoring production traffic.

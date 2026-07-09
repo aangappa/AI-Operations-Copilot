@@ -1,0 +1,18 @@
+Title:
+VPN Connectivity Failure
+
+Symptoms:
+- Remote users cannot connect.
+- VPN authentication fails.
+- Frequent connection drops.
+
+Possible Cause:
+VPN gateway failure or certificate issue.
+
+Resolution:
+1. Restart VPN service.
+2. Verify VPN certificates.
+3. Check firewall connectivity.
+
+Preventive Action:
+Monitor VPN gateway availability.

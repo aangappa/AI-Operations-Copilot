@@ -1,0 +1,19 @@
+Title:
+Oracle Database High CPU
+
+Symptoms:
+- Database CPU exceeds 90%.
+- Slow application response.
+- Long-running SQL queries.
+
+Possible Cause:
+Expensive SQL queries or missing indexes.
+
+Resolution:
+1. Identify top CPU-consuming queries.
+2. Analyze execution plans.
+3. Rebuild missing indexes.
+4. Kill runaway sessions if required.
+
+Preventive Action:
+Perform regular SQL performance tuning.

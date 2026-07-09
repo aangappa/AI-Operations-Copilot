@@ -1,63 +1,79 @@
 import os
 
-STOP_WORDS = {
-    "the",
-    "is",
-    "are",
-    "to",
-    "a",
-    "an",
-    "of",
-    "for",
-    "in",
-    "on",
-    "and",
-    "users"
-}
+from services.embedding_service import (
+    create_embedding,
+    similarity
+)
+
 
 def get_knowledge(incident):
 
-    title = incident.shortdescription.lower()
+    title = incident.shortdescription
+
+    incident_embedding = create_embedding(title)
+
+    results = []
 
     knowledge_folder = "knowledge"
-
-    best_match = None
-    highest_score = 0
 
     for filename in os.listdir(knowledge_folder):
 
         if not filename.endswith(".txt"):
             continue
 
-        filepath = os.path.join(knowledge_folder, filename)
+        filepath = os.path.join(
+            knowledge_folder,
+            filename
+        )
 
-        with open(filepath, "r", encoding="utf-8") as file:
+        with open(
+            filepath,
+            "r",
+            encoding="utf-8"
+        ) as file:
 
             content = file.read()
 
-        score = 0
+        document_embedding = create_embedding(content)
 
-        for word in title.split():
+        score = similarity(
+            incident_embedding,
+            document_embedding
+        )
 
-            if word in STOP_WORDS:
-                continue
+        print(f"{filename} -> {score:.3f}")
 
-            if word in content.lower():
-                score += 1
+        results.append({
+            "filename": filename,
+            "score": score,
+            "content": content
+        })
 
-        if score > highest_score:
-            highest_score = score
-            best_match = {
-                "filename": filename,
-                "content": content
-            }
+    if not results:
+        return "No knowledge found."
 
-    if best_match:
-        return f"""
-            Knowledge Article:
-            {best_match["filename"]}
+    results.sort(
+        key=lambda x: x["score"],
+        reverse=True
+    )
 
-            {best_match["content"]}
-        """
+    top_results = results[:3]
 
-    return "No matching knowledge found."
+    knowledge = ""
+
+    for item in top_results:
+
+        knowledge += f"""
+==================================================
+
+Knowledge Article:
+{item['filename']}
+
+Similarity Score:
+{item['score']:.3f}
+
+{item['content']}
+
+"""
+
+    return knowledge

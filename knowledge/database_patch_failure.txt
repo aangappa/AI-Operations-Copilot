@@ -1,0 +1,18 @@
+Title:
+Database Patch Deployment Failure
+
+Symptoms:
+- Applications fail after database maintenance.
+- Database services become unstable.
+- Authentication failures occur.
+
+Possible Cause:
+Patch incompatibility or incomplete deployment.
+
+Resolution:
+1. Validate patch logs.
+2. Restart database services.
+3. Roll back the patch if required.
+
+Preventive Action:
+Perform rollback testing before production deployment.

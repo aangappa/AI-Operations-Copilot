@@ -1,0 +1,20 @@
+Title:
+SAP Login Failure After Database Patch
+
+Symptoms:
+- Users cannot log in to SAP.
+- Login screen hangs or authentication fails.
+- High database CPU utilization after patch deployment.
+
+Possible Cause:
+A recently deployed database patch introduced performance degradation affecting SAP authentication.
+
+Resolution:
+1. Restart SAP Authentication Service.
+2. Clear SAP application cache.
+3. Verify database connectivity.
+4. Review database patch logs.
+5. Roll back the patch if necessary.
+
+Preventive Action:
+Validate database patches in a staging environment before production deployment.

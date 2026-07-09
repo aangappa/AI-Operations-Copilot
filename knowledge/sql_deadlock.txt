@@ -1,0 +1,19 @@
+Title:
+SQL Server Deadlock
+
+Symptoms:
+- Transactions fail randomly.
+- Deadlock detected errors.
+- Users experience intermittent failures.
+
+Possible Cause:
+Multiple sessions locking resources in different order.
+
+Resolution:
+1. Identify deadlock graph.
+2. Optimize transaction order.
+3. Reduce transaction duration.
+4. Add missing indexes.
+
+Preventive Action:
+Review application transaction design.

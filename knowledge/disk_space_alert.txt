@@ -1,0 +1,18 @@
+Title:
+Disk Space Critical
+
+Symptoms:
+- Disk utilization exceeds 95%.
+- Applications fail to write logs.
+- Server performance degrades.
+
+Possible Cause:
+Log files or backups consuming storage.
+
+Resolution:
+1. Remove old log files.
+2. Archive backups.
+3. Expand storage if necessary.
+
+Preventive Action:
+Configure automated log cleanup.

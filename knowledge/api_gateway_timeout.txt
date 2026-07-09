@@ -1,0 +1,17 @@
+Title:
+API Gateway Timeout
+
+Symptoms:
+- APIs return HTTP 504.
+- Backend services become unreachable.
+
+Possible Cause:
+Backend service latency or overloaded gateway.
+
+Resolution:
+1. Restart API Gateway.
+2. Scale backend services.
+3. Verify network latency.
+
+Preventive Action:
+Implement autoscaling and gateway monitoring.
