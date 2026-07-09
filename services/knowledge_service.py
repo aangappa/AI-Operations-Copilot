@@ -1,4 +1,5 @@
 import os
+from services.knowledge_cache import knowledge_cache
 
 from services.embedding_service import (
     create_embedding,
@@ -13,41 +14,27 @@ def get_knowledge(incident):
     incident_embedding = create_embedding(title)
 
     results = []
+    
 
-    knowledge_folder = "knowledge"
+    for document in knowledge_cache:
 
-    for filename in os.listdir(knowledge_folder):
-
-        if not filename.endswith(".txt"):
-            continue
-
-        filepath = os.path.join(
-            knowledge_folder,
-            filename
-        )
-
-        with open(
-            filepath,
-            "r",
-            encoding="utf-8"
-        ) as file:
-
-            content = file.read()
-
-        document_embedding = create_embedding(content)
-
+       
         score = similarity(
-            incident_embedding,
-            document_embedding
-        )
+        incident_embedding,
+        document["embedding"]
+     )
 
-        print(f"{filename} -> {score:.3f}")
+    print(f'{document['filename']} -> {score:.3f}')
 
-        results.append({
-            "filename": filename,
-            "score": score,
-            "content": content
-        })
+    results.append({
+
+        "filename": document["filename"],
+
+        "score": score,
+
+        "content": document["content"]
+
+    })
 
     if not results:
         return "No knowledge found."
