@@ -16,6 +16,7 @@ def load_knowledge_cache():
         with open(CACHE_FILE, "rb") as file:
 
             knowledge_cache = pickle.load(file)
+            return knowledge_cache
 
         print(
             f"Loaded {len(knowledge_cache)} articles from cache."
@@ -69,3 +70,4 @@ def load_knowledge_cache():
     print(
         f"Generated and cached {len(knowledge_cache)} articles."
     )
+    return knowledge_cache

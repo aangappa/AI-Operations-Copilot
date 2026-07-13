@@ -1,52 +1,25 @@
-import os
-from services.knowledge_cache import knowledge_cache
-
-from services.embedding_service import (
-    create_embedding,
-    similarity
-)
+from services.embedding_service import create_embedding
+from services.vector_index import search
 
 
 def get_knowledge(incident):
 
-    title = incident.shortdescription
-
-    incident_embedding = create_embedding(title)
-
-    results = []
-
-    for document in knowledge_cache:
-
-        score = similarity(
-            incident_embedding,
-            document["embedding"]
-        )
-
-        print(f'{document["filename"]} -> {score:.3f}')
-
-        results.append({
-
-            "filename": document["filename"],
-
-            "score": score,
-
-            "content": document["content"]
-
-        })
-
-    if not results:
-        return "No knowledge found."
-
-    results.sort(
-        key=lambda x: x["score"],
-        reverse=True
+    incident_embedding = create_embedding(
+        incident.shortdescription
     )
 
-    top_results = results[:3]
+    results = search(
+        incident_embedding,
+        top_k=3
+    )
 
     knowledge = ""
 
-    for item in top_results:
+    for item in results:
+
+        print(
+            f"{item['filename']} -> Distance {item['distance']:.4f}"
+        )
 
         knowledge += f"""
 ==================================================
@@ -54,8 +27,8 @@ def get_knowledge(incident):
 Knowledge Article:
 {item['filename']}
 
-Similarity Score:
-{item['score']:.3f}
+Distance:
+{item['distance']:.4f}
 
 {item['content']}
 
